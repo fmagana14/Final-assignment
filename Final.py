@@ -12,3 +12,22 @@ def load_data(file_name):
             })
     return users
 
+def deposit(users, username, password, amount):
+    user = login(users, username, password)
+    if user:
+        user['balance'] += amount
+        return True
+    else:
+        return False
+
+def withdraw(users, username, password, amount):
+    user = login(users, username, password)
+    if user:
+        if user['balance'] >= amount:
+            user['balance'] -= amount
+            return True
+        else:
+            print("Insufficient balance")
+            return False
+    else:
+        return False
